@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nfQ-LN-blS">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <scenes>
+        <!--Story Page View Controller-->
+        <scene sceneID="T73-f9-WEc">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="nfQ-LN-blS" customClass="StoryPageViewController" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EHc-QF-IM7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-518" y="322"/>
+        </scene>
+        <!--Story Part View Controller-->
+        <scene sceneID="xtr-FE-kuV">
+            <objects>
+                <viewController id="Iyt-hG-Imf" customClass="StoryPartViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="opZ-V7-JXf"/>
+                        <viewControllerLayoutGuide type="bottom" id="12J-eK-O81"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4IZ-7P-41E">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eFF-3b-3ff">
+                                <rect key="frame" x="180" y="180" width="240" height="240"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="1k4-Fx-TTM"/>
+                                    <constraint firstAttribute="width" constant="240" id="Uze-2d-2iW"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="mOa-Tq-dlQ" appends="YES" id="qFH-oK-A0O"/>
+                                </connections>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8xP-fK-URE">
+                                <rect key="frame" x="270" y="428" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="P7T-NA-ByK"/>
+                                    <constraint firstAttribute="height" constant="60" id="yAf-x4-aie"/>
+                                </constraints>
+                                <state key="normal" image="dc6ekyGxi">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cameraClicked:" destination="Iyt-hG-Imf" eventType="touchUpInside" id="aIV-7g-zM6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NRz-Dd-JNH">
+                                <rect key="frame" x="283" y="486" width="35" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="RZs-uM-u2G"/>
+                                    <constraint firstAttribute="height" constant="43" id="h6H-mU-KvU"/>
+                                </constraints>
+                                <state key="normal" image="clipart-microphone-icon-256x256-b5ed">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="microphoneClicked:" destination="Iyt-hG-Imf" eventType="touchUpInside" id="ifY-0s-1w0"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="8xP-fK-URE" secondAttribute="centerX" id="P1p-TH-rhw"/>
+                            <constraint firstAttribute="centerX" secondItem="NRz-Dd-JNH" secondAttribute="centerX" id="Slx-5t-jBQ"/>
+                            <constraint firstAttribute="centerY" secondItem="eFF-3b-3ff" secondAttribute="centerY" id="Vta-Tj-2dI"/>
+                            <constraint firstAttribute="centerX" secondItem="eFF-3b-3ff" secondAttribute="centerX" id="nt4-ha-ODO"/>
+                            <constraint firstItem="8xP-fK-URE" firstAttribute="top" secondItem="eFF-3b-3ff" secondAttribute="bottom" constant="8" id="pIx-g5-Ff3"/>
+                            <constraint firstItem="NRz-Dd-JNH" firstAttribute="top" secondItem="8xP-fK-URE" secondAttribute="bottom" constant="-2" id="syQ-y8-ysY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="storyCameraButton" destination="8xP-fK-URE" id="wj0-Yl-WpW"/>
+                        <outlet property="storyImageView" destination="eFF-3b-3ff" id="eSc-7V-M0l"/>
+                        <outlet property="storyMicrophoneButton" destination="NRz-Dd-JNH" id="fCX-YD-RdJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J9o-pd-ur2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="mOa-Tq-dlQ">
+                    <connections>
+                        <action selector="imageTapped:" destination="Iyt-hG-Imf" id="ia9-2z-EuQ"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="300" y="280"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="clipart-microphone-icon-256x256-b5ed" width="85" height="171"/>
+        <image name="dc6ekyGxi" width="100" height="100"/>
+    </resources>
+</document>
