@@ -18,7 +18,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *storyMicrophoneButton;
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 @property (strong, nonatomic) AVAudioRecorder *audioRecorder;
-@property (strong, nonatomic) Page *storyPage;
 
 @end
 
@@ -26,7 +25,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {

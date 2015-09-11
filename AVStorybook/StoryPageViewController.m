@@ -7,8 +7,12 @@
 //
 
 #import "StoryPageViewController.h"
+#import "Page.h"
+#import "StoryPartViewController.h"
 
-@interface StoryPageViewController ()
+@interface StoryPageViewController () <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+
+@property (nonatomic,strong) NSArray *pageArray;
 
 @end
 
@@ -16,7 +20,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.dataSource = self;
+    self.delegate = self;
+    
+    Page *page1 = [Page new];
+    Page *page2 = [Page new];
+    Page *page3 = [Page new];
+    Page *page4 = [Page new];
+    Page *page5 = [Page new];
+    
+    self.pageArray = @[page1, page2, page3, page4, page5];
+    
+    StoryPartViewController *part1 = [self.storyboard instantiateViewControllerWithIdentifier:@"part1"];
+    part1.storyPage = page1;
+    
+    [self setViewControllers:@[part1] direction:(UIPageViewControllerNavigationDirectionForward) animated:YES completion:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,14 +44,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
+    
+    return nil;
 }
-*/
+
+-(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
+    
+    return nil;
+}
+
 
 @end

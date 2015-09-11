@@ -15,7 +15,7 @@
         <!--Story Part View Controller-->
         <scene sceneID="xtr-FE-kuV">
             <objects>
-                <viewController id="Iyt-hG-Imf" customClass="StoryPartViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="part1" id="Iyt-hG-Imf" customClass="StoryPartViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="opZ-V7-JXf"/>
                         <viewControllerLayoutGuide type="bottom" id="12J-eK-O81"/>

@@ -7,7 +7,10 @@
 //
 
 #import "ViewController.h"
+@class Page;
 
 @interface StoryPartViewController : ViewController
+
+@property (strong, nonatomic) Page *storyPage;
 
 @end
