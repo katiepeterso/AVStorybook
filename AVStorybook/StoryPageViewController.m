@@ -44,14 +44,37 @@
     // Dispose of any resources that can be recreated.
 }
 
--(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
+-(StoryPartViewController *)pageViewController:(StoryPageViewController *)pageViewController viewControllerAfterViewController:(StoryPartViewController *)viewController {
     
-    return nil;
+    NSInteger index = [self.pageArray indexOfObject:viewController.storyPage];
+    
+    index++;
+    
+    if (index >= self.pageArray.count) {
+        return nil;
+    }
+    
+    StoryPartViewController *part = [self.storyboard instantiateViewControllerWithIdentifier:@"part1"];
+    part.storyPage = self.pageArray[index];
+
+    return part;
 }
 
--(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
+-(StoryPartViewController *)pageViewController:(StoryPageViewController *)pageViewController viewControllerBeforeViewController:(StoryPartViewController *)viewController {
     
-    return nil;
+    NSInteger index = [self.pageArray indexOfObject:viewController.storyPage];
+    
+    index--;
+    
+    if (index < 0) {
+        return nil;
+    }
+    
+    StoryPartViewController *part = [self.storyboard instantiateViewControllerWithIdentifier:@"part1"];
+    part.storyPage = self.pageArray[index];
+
+    return part;
+
 }
 
 
