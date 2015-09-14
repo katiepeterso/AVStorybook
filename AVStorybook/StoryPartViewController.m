@@ -11,10 +11,9 @@
 @import MobileCoreServices;
 #import "Page.h"
 
-@interface StoryPartViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface StoryPartViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *storyImageView;
-@property (strong, nonatomic) IBOutlet UIButton *storyCameraButton;
 @property (strong, nonatomic) IBOutlet UIButton *storyMicrophoneButton;
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 @property (strong, nonatomic) AVAudioRecorder *audioRecorder;
@@ -25,6 +24,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Set the audio file
+    NSArray *pathComponents = [NSArray arrayWithObjects:
+                               [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
+                               @"MyAudioMemo.m4a",
+                               nil];
+    NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
+    
+    // Setup audio session
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    
+    // Define the recorder setting
+    NSMutableDictionary *recordSetting = [[NSMutableDictionary alloc] init];
+    
+    [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
+    [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
+    [recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
+    
+    // Initiate and prepare the recorder
+    self.audioRecorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:recordSetting error:NULL];
+    self.audioRecorder.delegate = self;
+    self.audioRecorder.meteringEnabled = YES;
+    [self.audioRecorder prepareToRecord];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -54,12 +77,33 @@
 }
 
 - (IBAction)microphoneClicked:(id)sender {
+    if (self.audioPlayer.playing) {
+        [self.audioPlayer stop];
+    }
     
-//    avAudiorecorder
+    if (!self.audioRecorder.recording) {
+        AVAudioSession *session = [AVAudioSession sharedInstance];
+        [session setActive:YES error:nil];
+        
+        // Start recording
+        [self.audioRecorder record];
+        
+    } else {
+        [self.audioRecorder stop];
+        
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setActive:NO error:nil];
+    }
 }
 
 - (IBAction)imageTapped:(id)sender {
-//    avaudioPlayer
+    if (!self.audioRecorder.recording){
+        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:self.audioRecorder.url error:nil];
+        [self.audioPlayer setDelegate:self];
+        [self.audioPlayer play];
+    }
 }
+
+
 
 @end
